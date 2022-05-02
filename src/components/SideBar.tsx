@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react';
+import { memo } from 'react';
 import { Button } from '../components/Button';
-
-import { api } from '../services/api';
 
 interface GenreResponseProps {
   id: number;
@@ -11,18 +9,11 @@ interface GenreResponseProps {
 
 interface SideBarProps {
   handleClickButton(id: number): void,
-  selectedGenreId: number
+  selectedGenreId: number,
+  genres: Array<GenreResponseProps>,
 }
 
-export function SideBar(props: SideBarProps) {
-  // Complete aqui
-  const [genres, setGenres] = useState<GenreResponseProps[]>([]);
-
-  useEffect(() => {
-    api.get<GenreResponseProps[]>('genres').then(response => {
-      setGenres(response.data);
-    });
-  }, []);
+function SideBarComponent({ genres, selectedGenreId, handleClickButton }: SideBarProps) {
 
   return (
     <nav className="sidebar">
@@ -34,8 +25,8 @@ export function SideBar(props: SideBarProps) {
             key={String(genre.id)}
             title={genre.title}
             iconName={genre.name}
-            onClick={() => props.handleClickButton(genre.id)}
-            selected={props.selectedGenreId === genre.id}
+            onClick={() => handleClickButton(genre.id)}
+            selected={selectedGenreId === genre.id}
           />
         ))}
       </div>
@@ -43,3 +34,7 @@ export function SideBar(props: SideBarProps) {
     </nav>
   )
 }
+
+export const SideBar = memo(SideBarComponent, (prevProps, nextProps) => {
+  return Object.is(prevProps.genres, nextProps.genres) && prevProps.selectedGenreId === nextProps.selectedGenreId
+})
