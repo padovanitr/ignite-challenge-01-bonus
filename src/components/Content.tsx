@@ -7,9 +7,10 @@ interface ContentProps {
   selectedGenre: {
     title: string;
   },
+  renderMovieModal: (value: string) => void;
 }
 
-function ContentComponent({ selectedGenre, movies }: ContentProps) {
+function ContentComponent({ selectedGenre, movies, renderMovieModal }: ContentProps) {
 
   return (
     <div className="container">
@@ -20,7 +21,7 @@ function ContentComponent({ selectedGenre, movies }: ContentProps) {
       <main>
         <div className="movies-list">
           {movies.map(movie => (
-            <MovieCard key ={movie.imdbID} title={movie.Title} poster={movie.Poster} runtime={movie.Runtime} rating={movie.Ratings[0].Value} />
+            <MovieCard renderMovieModal={renderMovieModal} imdbID={movie.imdbID} key={movie.imdbID} title={movie.Title} poster={movie.Poster} runtime={movie.Runtime} rating={movie.Ratings[0].Value} />
           ))}
         </div>
       </main>

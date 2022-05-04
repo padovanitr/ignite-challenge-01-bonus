@@ -1,0 +1,169 @@
+.movieModalWrapper {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;    
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 10;
+    display: block;
+
+    &__modal {
+        width: 700px;
+        height: 500px;
+        padding: 2rem;
+        position: absolute;
+        background: var(--white);
+        background-clip: padding-box;
+        box-shadow: 0px 3px 6px #00000029;
+        margin: auto;
+        border-radius: 4px;
+        margin: 0;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+
+        @media screen and (max-width: 768px) {
+            width: 288px;
+            height: 550px;
+            padding: 1rem;
+            position: inherit;
+            background: var(--white);
+            background-clip: padding-box;
+            box-shadow: 0px 3px 6px #00000029;
+            margin: auto;
+            border-radius: 4px;
+            margin: 10px auto 0px;
+            overflow: scroll;
+        }
+    }
+
+    &__closeModal {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        border: none;
+        background-color: var(--white);
+        //background-image: url('/images/close.png');
+        background-size: 10px;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: absolute;
+        right: 0;
+        top: 0;
+        margin-top: 15px;
+        margin-right: 15px;
+        cursor: pointer;
+    }
+
+    .bookInfo {
+        display: flex;
+        overflow: hidden;
+
+        @media screen and (max-width: 768px) {
+            flex-direction: column;
+        }
+
+        &__description {
+            p {
+                font-family: Heebo;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 20px;
+                color: var(--gray-400);
+                margin-top: -5px;
+                overflow: auto;
+                height: 70px;
+                text-indent: 20px;
+
+                &::before {
+                    content: "";
+                    //background: url('/images/quotes.png');
+                    background-size: 12px;
+                    display: block;
+                    background-repeat: no-repeat;
+                    height: 12px;
+                    width: 12px;
+                    position: absolute;
+                    margin-top: 4px;
+                }
+            }
+        }
+
+        &__image {
+            padding: 20px;
+
+            img {
+                height: 400px;
+                width: 300px;
+                filter: drop-shadow(0px 12px 18px rgba(0, 0, 0, 0.3));
+
+                @media screen and (max-width: 768px) {
+                    height: 351px;
+                    width: 240px;
+                }
+            }
+        }
+
+        &__details {
+            padding: 0 0 0 30px;
+
+            @media screen and (max-width: 768px) {
+                padding: 0 0 0 10px;
+            }
+
+            h1 {
+                font-family: Heebo;
+                font-size: 28px;
+                color: var(--gray-800);
+                line-height: 30px;
+                margin-bottom: 0;
+            }
+
+            small {
+                font-family: Heebo;
+                font-weight: 400;
+                color: var(--main);
+                font-size: 12px;
+                line-height: 20px;
+            }
+
+            h2 {
+                font-family: Heebo;
+                font-weight: 500;
+                font-size: 12px;
+                line-height: 28.5px;
+            }
+
+            .summary {
+                display: flex;
+                gap: 125px;
+
+                @media screen and (max-width: 768px) {
+                    gap: 100px;
+                }
+
+                &__index {
+                    font-family: Heebo;
+                    font-weight: 500;
+                    font-size: 12px;
+                    line-height: 20px;
+                    color: var(--gray-800);
+                }
+                
+                &__info {
+                    text-align: right;
+                    font-family: Heebo;
+                    font-weight: 400;
+                    font-size: 12px;
+                    line-height: 20px;
+                    color: var(--gray-400);
+                }
+            }
+        }
+    }
+
+}

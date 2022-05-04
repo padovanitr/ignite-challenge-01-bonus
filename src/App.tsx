@@ -6,16 +6,35 @@ import { api } from './services/api';
 
 import { GenreResponseProps, MovieProps } from './@types/Movies'
 
+interface MovieModal {
+  Title: string;
+  Poster: string;
+  Actors: string;
+  Director: string;
+  Plot: string;
+}
+
 import './styles/global.scss';
 
 import './styles/sidebar.scss';
 import './styles/content.scss';
+import { Modal } from './components/Modal';
 
 export function App() {
   const [selectedGenreId, setSelectedGenreId] = useState(1);
   const [genres, setGenres] = useState<GenreResponseProps[]>([]);
   const [movies, setMovies] = useState<MovieProps[]>([]);
   const [selectedGenre, setSelectedGenre] = useState<GenreResponseProps>({} as GenreResponseProps);
+  const [movieModal, setMovieModal] = useState<MovieModal>({} as MovieModal);
+  const [openModal, setOpenModal] = useState(false);
+
+  async function renderMovieModal(imdbID: string) {
+    console.log('imdb', imdbID)
+    api.get(`movies/?imdbID=${imdbID}`).then(response => {
+      setOpenModal(true)
+      setMovieModal(response.data[0])
+    });
+  }
 
   useEffect(() => {
     api.get<GenreResponseProps[]>('genres').then(response => {
@@ -30,6 +49,7 @@ export function App() {
   const data = useCallback(() => {
 
     api.get<MovieProps[]>(`movies/?Genre_id=${selectedGenreId}`).then(response => {
+      console.log('movies', response.data);
       setMovies(response.data);
     });
 
@@ -55,7 +75,15 @@ export function App() {
       <Content 
         selectedGenre={selectedGenre}
         movies={movies}
+        renderMovieModal={renderMovieModal}
       />
+
+      {movieModal && openModal &&
+        <Modal 
+          setOpenModal={setOpenModal}
+          movieModal={movieModal}
+        />
+      }
     </div>
   )
 }

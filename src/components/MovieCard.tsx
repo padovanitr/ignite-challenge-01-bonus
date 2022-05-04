@@ -7,26 +7,28 @@ interface MovieCardProps {
   poster: string;
   rating: string;
   runtime: string;
+  imdbID: string;
+  renderMovieModal: (value: string) => void;
 }
 
-export function MovieCard(props: MovieCardProps) {
+export function MovieCard({ renderMovieModal, title, poster, rating, runtime, imdbID }: MovieCardProps) {
   return (
-    <button className="movie-card">
+    <button onClick={() => renderMovieModal(imdbID)} className="movie-card">
       <img
-        src={props.poster}
-        alt={props.title}
+        src={poster}
+        alt={title}
       />
 
       <div>
         <div className="movie-info">
-          <span>{props.title}</span>
+          <span>{title}</span>
           <div className="meta">
             <div>
-              <Star /> {props.rating}
+              <Star /> {rating}
             </div>
 
             <div>
-              <Clock /> {props.runtime}
+              <Clock /> {runtime}
             </div>
           </div>
         </div>
