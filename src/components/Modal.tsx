@@ -7,11 +7,17 @@ interface ModalProps {
         Actors: string;
         Director: string;
         Plot: string;
+        Year: string;
+        Runtime: string;
+        Production: string;
+        imdbRating: string;
+        Country: string;
     };
     setOpenModal: (value: boolean) => void;
 }
 
 export function Modal({ movieModal, setOpenModal }: ModalProps) {
+    console.log(movieModal)
     return (
         <div className="movieModalWrapper">
             <button onClick={() => setOpenModal(false)} className="movieModalWrapper__closeModal"></button>
@@ -23,21 +29,35 @@ export function Modal({ movieModal, setOpenModal }: ModalProps) {
                     <div className="bookInfo__details">
                         <h1>{movieModal.Title}</h1>
 
-                        <h2>INFORMAÇÕES</h2>
-                        <div className="summary">
-                            <div className="summary__index">
-                                <div>Cast</div>
-                                <div>Director</div>
-                            </div>
-                            <div className="summary__info">
-                                <div>{movieModal.Actors}</div>
-                                <div>{movieModal.Director}</div>
-                            </div>
+                        <div className="summaryContainer">
+                            <div>Cast</div>
+                            <div>{movieModal.Actors}</div>
+
+                            <div>Director</div>
+                            <div>{movieModal.Director}</div>
+
+                            <div>Year</div>
+                            <div>{movieModal.Year}</div>
+
+                            <div>Duration</div>
+                            <div>{movieModal.Runtime}</div>
+
+                            <div>Production</div>
+                            <div>{movieModal.Production}</div>
+
+                            <div>IMDB</div>
+                            <div>{movieModal.imdbRating}</div>
+
+                            <div>Country</div>
+                            <div>{movieModal.Country}</div>
                         </div>
-                        <h2>RESENHA DA EDITORA</h2>
-                        <div className="bookInfo__description">
-                            <p>{movieModal.Plot}</p>
-                        </div>
+
+                        <footer>
+                            <h2>Description</h2>
+                            <div className="bookInfo__description">
+                                <p>{movieModal.Plot}</p>
+                            </div>
+                        </footer>
                     </div>
                 </div>
             </div>
