@@ -1,3 +1,5 @@
+import { CgClose } from "react-icons/cg"
+
 import '../styles/modal.scss';
 
 interface ModalProps {
@@ -16,11 +18,15 @@ interface ModalProps {
     setOpenModal: (value: boolean) => void;
 }
 
+// https://codesandbox.io/s/oz8wb?file=/src/index.js:198-296
+
 export function Modal({ movieModal, setOpenModal }: ModalProps) {
     console.log(movieModal)
     return (
         <div className="movieModalWrapper">
-            <button onClick={() => setOpenModal(false)} className="movieModalWrapper__closeModal"></button>
+            <button onClick={() => setOpenModal(false)} className="movieModalWrapper__closeModal">
+                <CgClose style={{color: '#ccc', fontSize: '30px'}}/>
+            </button>
             <div className="movieModalWrapper__modal">
                 <div className="bookInfo">
                     <div className="bookInfo__image">

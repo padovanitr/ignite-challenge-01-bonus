@@ -12,6 +12,11 @@ interface MovieModal {
   Actors: string;
   Director: string;
   Plot: string;
+  Year: string;
+  Runtime: string;
+  Production: string;
+  imdbRating: string;
+  Country: string;
 }
 
 import './styles/global.scss';
@@ -80,7 +85,7 @@ export function App() {
 
       {movieModal && openModal &&
         <Modal 
-          setOpenModal={setOpenModal}
+          setOpenModal={() => setOpenModal(false)}
           movieModal={movieModal}
         />
       }
