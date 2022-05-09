@@ -18,8 +18,6 @@ export interface ModalProps {
     setOpenModal: (value: boolean) => void;
 }
 
-// https://codesandbox.io/s/oz8wb?file=/src/index.js:198-296
-
 export default function Modal({ movieModal, setOpenModal }: ModalProps) {
     return (
         <div className="movieModalWrapper">
