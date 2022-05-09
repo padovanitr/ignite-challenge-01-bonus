@@ -2,7 +2,7 @@ import { CgClose } from "react-icons/cg"
 
 import '../styles/modal.scss';
 
-interface ModalProps {
+export interface ModalProps {
     movieModal: {
         Title: string;
         Poster: string;
@@ -20,8 +20,7 @@ interface ModalProps {
 
 // https://codesandbox.io/s/oz8wb?file=/src/index.js:198-296
 
-export function Modal({ movieModal, setOpenModal }: ModalProps) {
-    console.log(movieModal)
+export default function Modal({ movieModal, setOpenModal }: ModalProps) {
     return (
         <div className="movieModalWrapper">
             <button onClick={() => setOpenModal(false)} className="movieModalWrapper__closeModal">

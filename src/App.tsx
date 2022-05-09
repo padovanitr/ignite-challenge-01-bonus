@@ -1,10 +1,16 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, lazy, Suspense } from 'react';
 
 import { SideBar } from './components/SideBar';
 import { Content } from './components/Content';
 import { api } from './services/api';
 
 import { GenreResponseProps, MovieProps } from './@types/Movies'
+
+import './styles/global.scss';
+
+import './styles/sidebar.scss';
+import './styles/content.scss';
+// import { Modal } from './components/Modal';
 
 interface MovieModal {
   Title: string;
@@ -19,11 +25,10 @@ interface MovieModal {
   Country: string;
 }
 
-import './styles/global.scss';
+const Modal = lazy<any>(() => {
+  return import('./components/Modal');
+})
 
-import './styles/sidebar.scss';
-import './styles/content.scss';
-import { Modal } from './components/Modal';
 
 export function App() {
   const [selectedGenreId, setSelectedGenreId] = useState(1);
@@ -34,7 +39,6 @@ export function App() {
   const [openModal, setOpenModal] = useState(false);
 
   async function renderMovieModal(imdbID: string) {
-    console.log('imdb', imdbID)
     api.get(`movies/?imdbID=${imdbID}`).then(response => {
       setOpenModal(true)
       setMovieModal(response.data[0])
@@ -54,7 +58,6 @@ export function App() {
   const data = useCallback(() => {
 
     api.get<MovieProps[]>(`movies/?Genre_id=${selectedGenreId}`).then(response => {
-      console.log('movies', response.data);
       setMovies(response.data);
     });
 
@@ -84,10 +87,16 @@ export function App() {
       />
 
       {movieModal && openModal &&
+      <Suspense fallback={
+        <div className="loadingBackDrop">
+          <div className="loadingBackDrop__gif"></div>
+        </div>
+      }>
         <Modal 
           setOpenModal={() => setOpenModal(false)}
           movieModal={movieModal}
         />
+      </Suspense>
       }
     </div>
   )
